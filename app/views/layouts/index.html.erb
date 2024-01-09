@@ -1,0 +1,132 @@
+<html>
+<head>
+
+      <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flex Panels 💪</title>
+  <link href='https://fonts.googleapis.com/css?family=Amatic+SC' rel='stylesheet' type='text/css'>
+  <link rel="icon" href="https://fav.farm/✅" />
+
+  <style>
+  #background-image{
+    position: fixed;
+  }
+
+  h1{
+    font-size: 45px;
+    font-family: Tahoma;
+    margin-left:45%;
+  }
+    .panels{
+    position:absolute;
+    width:100%;
+    
+  }
+ .text-container{
+    display:grid;
+    grid-template-columns:auto auto auto;
+    justify-content:space-between;
+    width:40%;
+    z-index:3;
+    margin-left:28%;
+    font-size: 45px;
+    font-family: "PT Sans";
+    margin-top:-30px;
+ }
+p:nth-child(2){
+    color:red;
+}
+.block{
+     position:fixed;
+
+     margin-left: 87%;
+     margin-top:50%;
+}
+.btn{
+    padding:10px 20px;
+    text-decoration:none;
+    background-color:black;
+    color:white;
+     text-align: center;
+     cursor: pointer;
+     border:none;
+     border-radius:5px;
+}
+
+    </style>
+  </head>
+
+  <body>
+     <img id="background-image" src="https://img.freepik.com/free-photo/white-brick-wall-textures-background_74190-6515.jpg?w=2000&t=st=1704436855~exp=1704437455~hmac=b8799d4993b92273ab56f009ad9a2bdbcc03edd5b0cfc8a60231193880d22b89" alt="background-image"> 
+ 
+  <div id="panelsContainer" class="panels">
+   
+
+
+<h1>Sentence</h1>
+<br>
+
+    </div>
+ <div class="block"> <%= link_to '+ Add New', new_panel_path, class: 'btn' %></div>
+
+    <script>
+
+// Getting the data from route by using fetch api
+const url = "http://localhost:3000/get_data";
+
+
+    fetch(url)
+        .then(response => {
+            if (!response.ok) {
+               throw new Error('Network response was not ok');
+            }
+         return response.json();
+        })
+         .then(data => {
+            
+            for (let i = 0; i < data.length; i++) {
+                
+                // Taking the string content in an array
+                
+                const element = data[i]['content'];
+              //  console.log(element);
+                const parts = element.split(" ");
+
+                // creation of HTML element to Javascript   
+                const container =  document.createElement("div");
+                container.classList.add("text-container");
+
+                const paragraph_1 = document.createElement("p");
+                paragraph_1.innerText = parts[0];
+                container.append(paragraph_1);
+
+                const paragraph_2 = document.createElement("p");
+                paragraph_2.innerText = parts[1];
+                container.append(paragraph_2);
+
+                const paragraph_3 = document.createElement("p");
+                paragraph_3.innerText = parts[2];
+                container.append(paragraph_3)
+
+                const panel = document.getElementById("panelsContainer");
+                panel.append(container)
+            }
+          
+         })
+         // catch block
+         .catch(error => {
+           console.error('Error:', error);
+         });
+
+
+
+
+ 
+
+ 
+
+        </script>
+    </body>
+
+
+    </html>

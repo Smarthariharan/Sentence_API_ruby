@@ -1,0 +1,88 @@
+<html>
+    <style>
+        div{
+            margin: 16%;
+        }
+    #content-form{
+            margin: 20%;
+    height: 372px;
+    box-shadow: 3px 3px 20px 5px;
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        flex-direction: column; 
+        
+    }
+    input{
+            width: 300px;
+    margin-top: 3%;
+    border: 2px solid black;
+    border-radius: 4px;
+    height: 43px;
+    }
+    button{
+    margin-top: 3%;
+    width: 121px;
+    height: 45px;
+    font-size: 18px;
+    background-color: black;
+    color: white;
+    border-radius: 3px;
+    border: none;
+    cursor: pointer;
+    }
+    #back_btn{
+        text-decoration: none;
+        width : 44px;
+        margin-top: 6px;
+        color: orange;
+    }
+        </style>
+
+<div>
+<form method="post" id="content-form">
+    <h1>New Sentence</h1>
+   <input type='text' id="content_input" focus placeholder="Enter any three Words...">
+   <button type="submit"> ADD</button>
+   <br>
+   <%= link_to '< back', panels_path, id: 'back_btn' %>
+   
+
+    </form>
+    
+</div>
+
+
+
+<script>
+    // javascript code for POST request
+ document.getElementById('content-form').addEventListener('submit', function(event) {
+    event.preventDefault();
+
+  const content_value = document.getElementById('content_input').value
+  console.log(content_value);
+
+fetch('http://localhost:3000/post_data', {
+ method: 'POST',
+ headers: {
+    'Content-Type': 'application/json'
+ },
+ body: JSON.stringify(content_value)
+})
+.then(data => {
+ console.log("Data = " + data)
+ alert('Content was successfully created.');
+ window.location.href = data.url
+})
+.catch(error => {
+ console.error(error)
+});
+ });
+
+
+
+
+
+
+</script>
+</html>
