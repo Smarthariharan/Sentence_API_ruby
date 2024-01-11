@@ -17,9 +17,9 @@ class PanelsController < ApplicationController
       
     
       def create
-        content = params[:_json]
+        content = params[:_json].
       #  puts "========= params #{params[:_json]} content: #{content}"
-       @panel = Panel.new(content:content)
+        @panel = Panel.new(content:content)
         res_json = {}
         begin
           @panel.save!
