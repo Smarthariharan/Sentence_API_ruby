@@ -2,7 +2,9 @@ class PanelsController < ApplicationController
   skip_before_action :verify_authenticity_token
 
     def index
+      puts "===================Hello and "
      render 'layouts/index'
+
     end
 
     def get_data

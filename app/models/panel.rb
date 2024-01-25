@@ -1,4 +1,5 @@
 class InvalidContentError < StandardError; end
+
 class Panel < ApplicationRecord
     include ActionView::Helpers::SanitizeHelper
 
